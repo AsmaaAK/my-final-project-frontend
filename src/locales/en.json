@@ -1,0 +1,11 @@
+{
+  "dashboard": "Dashboard",
+  "volunteers": "Volunteers",
+  "events": "Events",
+  "matching": "Matching",
+  "reports": "Reports",
+  "settings": "Settings",
+  "logout": "Logout",
+  "matched_volunteers": "Matched Volunteers",
+  "no_matches": "No matched volunteers currently"
+}
