@@ -5,16 +5,14 @@ import Volunteers from '../views/Volunteers.vue';
 import Events from '../views/Events.vue';
 import Matching from '../views/Matching.vue';
 import Reports from '../views/Reports.vue';
-import Settings from '../views/Settings.vue';
 import ExportEvents from '../views/ExportEvents.vue';
 
 const routes = [
-  { path: '/', component: Dashboard  },
-  { path: '/volunteers' ,component: Volunteers  },
+  { path: '/', component: Dashboard   },
+  { path: '/Volunteers' ,component: Volunteers  },
   { path: '/events', component: Events },
   { path: '/matching', component: Matching },
   { path: '/reports', component: Reports },
-  { path: '/settings', component: Settings },
   { path: '/login' ,component: () => import('../views/Login.vue') },
   { path: '/profile', component: () => import('../views/UserProfile.vue') },
   { path: '/register-volunteer', component: () => import('../views/RegisterVolunteer.vue') },

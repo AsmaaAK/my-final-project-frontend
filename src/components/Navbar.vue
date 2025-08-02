@@ -80,8 +80,8 @@ function logout() {
   button {
     min-width: 40px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
   }
 }
 </style>

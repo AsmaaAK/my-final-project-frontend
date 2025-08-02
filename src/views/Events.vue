@@ -1,105 +1,144 @@
 <template>
-  <div class="p-6 max-w-3xl mx-auto">
+  <div class="p-4 md:p-6 max-w-3xl mx-auto">
     <!-- نموذج الإضافة/التعديل -->
-    <h1 class="text-2xl font-bold mb-6">
+    <h1 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">
       {{ editing ? 'تعديل الفعالية' : 'إضافة فعالية جديدة' }}
     </h1>
-    <form @submit.prevent="handleSubmit" class="space-y-4 mb=6 bg-white dark:bg-gray-800 p-6 rounded shadow mb-8">
-      <input v-model="form.title" class="w-full p-2 rounded border" placeholder="اسم الفعالية" required />
-      <input v-model="form.description" class="w-full p-2 rounded border" placeholder="الوصف" required />
-      <input v-model="form.date" type="date" class="w-full p-2 rounded border" required />
-      <input v-model="form.location" class="w-full p-2 rounded border" placeholder="الموقع" required />
-      <input v-model="form.skills" class="w-full p-2 rounded border" placeholder="المهارات المطلوبة (بفواصل)" required />
-      
-      <div class="flex space-x-4">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    <form @submit.prevent="handleSubmit" class="mb-4 md:mb-6 bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow space-y-3 md:space-y-4">
+      <h2 class="text-lg md:text-xl font-semibold">{{ editing ? 'تعديل الفعالية' : 'إضافة فعالية جديدة' }}</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        <input v-model="form.title" placeholder="اسم الفعالية" required class="p-2 border rounded w-full" />
+        <input v-model="form.description" placeholder="الوصف" required class="p-2 border rounded w-full" />
+        <input v-model="form.date" type="date" placeholder="التاريخ" required class="p-2 border rounded w-full" />
+        <input v-model="form.location" placeholder="الموقع" required class="p-2 border rounded w-full" />
+        <input v-model="form.skills" placeholder="المهارات المطلوبة (مفصولة بفواصل)" required class="p-2 border rounded sm:col-span-2 lg:col-span-3 w-full" />
+      </div>
+
+      <div class="flex flex-wrap gap-2 md:gap-4">
+        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm md:text-base">
           {{ editing ? 'حفظ التعديلات' : 'إضافة' }}
         </button>
-        <button v-if="editing" type="button" @click="cancelEdit" class="text-gray-500">إلغاء</button>
+        <button v-if="editing" type="button" @click="cancelEdit" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded text-sm md:text-base">
+          إلغاء
+        </button>
       </div>
     </form>
 
     <!-- فلترة + أزرار التصدير -->
-    <div
-      class="mb-6 bg-white dark:bg-gray-800 p-4 rounded shadow flex flex-wrap md:flex-nowrap md:space-x-4 space-y-4 md:space-y-0 items-center"
-    >
+    <div class="mb-6 bg-white dark:bg-gray-800 p-4 rounded shadow flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 items-center">
       <input
         v-model="filters.location"
         type="text"
         placeholder="فلترة حسب الموقع"
-        class="flex-1 p-2 rounded border"
+        class="flex-1 min-w-[150px] p-2 rounded border"
       />
       <input
         v-model="filters.fromDate"
         type="date"
         placeholder="فلترة حسب التاريخ من"
-        class="flex-1 p-2 rounded border"
+        class="flex-1 min-w-[150px] p-2 rounded border"
       />
-      <button @click="clearFilters" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">
-        مسح الفلاتر
-      </button>
-
-      <!-- أزرار التصدير -->
-      <button
-        @click="exportCSV"
-        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded whitespace-nowrap"
-      >
-        تصدير CSV
-      </button>
-      <button
-        @click="exportJSON"
-        class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded whitespace-nowrap"
-      >
-        تصدير JSON
-      </button>
+      <div class="flex gap-3 w-full sm:w-auto">
+        <button @click="clearFilters" class="bg-gray-400 text-white px-3 py-2 rounded hover:bg-gray-500 text-sm md:text-base whitespace-nowrap">
+          مسح الفلاتر
+        </button>
+        <button
+          @click="exportCSV"
+          class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded whitespace-nowrap text-sm md:text-base"
+        >
+          تصدير CSV
+        </button>
+        <button
+          @click="exportJSON"
+          class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded whitespace-nowrap text-sm md:text-base"
+        >
+          تصدير JSON
+        </button>
+      </div>
     </div>
 
     <!-- عرض الفعاليات -->
- <div v-if="filteredEvents.length === 0" class="text-gray-500 text-center">لا توجد فعاليات تطابق الفلاتر</div>
+    <div v-if="filteredEvents.length === 0" class="text-gray-500 text-center p-4 bg-white dark:bg-gray-800 rounded shadow">
+      لا توجد فعاليات تطابق الفلاتر
+    </div>
 
-<!-- عرض الفعاليات كجدول -->
-<div v-if="filteredEvents.length === 0" class="text-gray-500 text-center">
-  لا توجد فعاليات تطابق الفلاتر
-</div>
+    <!-- جدول الفعاليات للشاشات الكبيرة -->
+    <div class="hidden md:block overflow-x-auto">
+      <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow overflow-hidden">
+        <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
+          <tr>
+            <th class="p-3 text-right">#</th>
+            <th class="p-3 text-right">العنوان</th>
+            <th class="p-3 text-right">الوصف</th>
+            <th class="p-3 text-right">التاريخ</th>
+            <th class="p-3 text-right">الموقع</th>
+            <th class="p-3 text-right">المهارات</th>
+            <th class="p-3 text-right">إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(event, index) in filteredEvents"
+            :key="event.id"
+            class="border-t border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+            @click="openEventModal(event)"
+          >
+            <td class="p-3">{{ index + 1 }}</td>
+            <td class="p-3">{{ event.title }}</td>
+            <td class="p-3">{{ event.description }}</td>
+            <td class="p-3">{{ event.date }}</td>
+            <td class="p-3">{{ event.location }}</td>
+            <td class="p-3">{{ event.requiredSkills.join(', ') }}</td>
+            <td class="p-3 space-x-2" @click.stop>
+              <button @click.stop="startEdit(event)" class="text-blue-600 hover:underline">تعديل</button>
+              <button @click.stop="deleteEvent(event.id)" class="text-red-600 hover:underline">حذف</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<table v-else class="min-w-full table-auto bg-white dark:bg-gray-800 rounded shadow overflow-hidden">
-  <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
-    <tr>
-      <th class="p-3 text-right">#</th>
-      <th class="p-3 text-right">العنوان</th>
-      <th class="p-3 text-right">الوصف</th>
-      <th class="p-3 text-right">التاريخ</th>
-      <th class="p-3 text-right">الموقع</th>
-      <th class="p-3 text-right">المهارات</th>
-      <th class="p-3 text-right">إجراءات</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr
+    <!-- عرض بطاقات الفعاليات للشاشات الصغيرة -->
+    <div class="md:hidden space-y-4">
+      <div 
         v-for="(event, index) in filteredEvents"
         :key="event.id"
-        class="border-t border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
-        @click="openEventModal(event)">
+        class="bg-white dark:bg-gray-800 p-4 rounded shadow cursor-pointer"
+        @click="openEventModal(event)"
+      >
+        <div class="flex justify-between items-start">
+          <h3 class="font-bold text-lg">{{ event.title }}</h3>
+          <span class="text-gray-500">{{ index + 1 }}</span>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mt-2">{{ event.description }}</p>
+        <div class="mt-3 grid grid-cols-2 gap-2 text-sm">
+          <div>
+            <span class="font-medium">التاريخ:</span>
+            <span>{{ event.date }}</span>
+          </div>
+          <div>
+            <span class="font-medium">الموقع:</span>
+            <span>{{ event.location }}</span>
+          </div>
+          <div class="col-span-2">
+            <span class="font-medium">المهارات:</span>
+            <span>{{ event.requiredSkills.join(', ') }}</span>
+          </div>
+        </div>
+        <div class="mt-3 flex space-x-3" @click.stop>
+          <button @click.stop="startEdit(event)" class="text-blue-600 hover:underline text-sm">تعديل</button>
+          <button @click.stop="deleteEvent(event.id)" class="text-red-600 hover:underline text-sm">حذف</button>
+        </div>
+      </div>
+    </div>
 
-      <td class="p-3">{{ index + 1 }}</td>
-      <td class="p-3">{{ event.title }}</td>
-      <td class="p-3">{{ event.description }}</td>
-      <td class="p-3">{{ event.date }}</td>
-      <td class="p-3">{{ event.location }}</td>
-      <td class="p-3">{{ event.requiredSkills.join(', ') }}</td>
-      <td class="p-3 space-x-2">
-        <button @click.stop="startEdit(event)" class="text-blue-600 hover:underline">تعديل</button>
-        <button @click.stop="deleteEvent(event.id)" class="text-red-600 hover:underline">حذف</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<EventCard :event="selectedEvent" :visible="showModal" @close="showModal = false" />
-</div>
+    <!-- مودال عرض الفعالية -->
+    <EventCard :event="selectedEvent" :visible="showModal" @close="showModal = false" />
+  </div>
 </template>
 
 <script setup>
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import EventCard from '../components/EventCard.vue'
 import { ref, computed, onMounted } from 'vue'
 
@@ -115,6 +154,8 @@ const form = ref({
 const events = ref([])
 const editing = ref(false)
 const editId = ref(null)
+const selectedEvent = ref(null)
+const showModal = ref(false)
 
 // فلترات البحث
 const filters = ref({
@@ -221,10 +262,8 @@ const clearFilters = () => {
   filters.value.location = ''
   filters.value.fromDate = ''
 }
-// عرض بطاقة معلومات الفعالية
-const selectedEvent = ref(null)
-const showModal = ref(false)
 
+// عرض بطاقة معلومات الفعالية
 const openEventModal = (event) => {
   selectedEvent.value = event
   showModal.value = true
@@ -281,3 +320,12 @@ const exportJSON = () => {
   URL.revokeObjectURL(url)
 }
 </script>
+
+<style>
+/* تحسينات للعرض على الجوال */
+@media (max-width: 767px) {
+  table {
+    display: none;
+  }
+}
+</style>
