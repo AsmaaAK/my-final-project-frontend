@@ -1,2 +1,17 @@
 @import './base.css';
 @import "tailwindcss";
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme{
+    --color-primary: theme ("colors.gray.50");
+    --color-secondary:theme("colors.gray.800");
+    --color-accent:theme("colors.blue.500");
+    --font-family: "Playwrite AU QLD", cursive;
+}
+@layer base{
+    .dark{
+    --color-primary:theme("colors.gray.800");
+    --color-secondary:theme("colors.gray.100");
+    --color-accent:theme("colors.blue.900");
+}
+}

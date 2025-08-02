@@ -11,9 +11,11 @@ import { faTachometerAlt, faUsers, faCalendarAlt, faBalanceScale, faChartBar, fa
 
 library.add(faTachometerAlt, faUsers, faCalendarAlt, faBalanceScale, faChartBar, faCog, faDownload)
 
+const lang = localStorage.getItem('lang') || 'ar'
+document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr')
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(router);
-app.use(i18n); // ✅
+app.use(i18n); 
 app.use(createPinia());
 app.mount('#app');
