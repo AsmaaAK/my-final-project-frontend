@@ -1,5 +1,5 @@
 // Vue Router Configuration
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Dashboard from '../views/Dashboard.vue';
 import Volunteers from '../views/Volunteers.vue';
 import Events from '../views/Events.vue';
@@ -10,7 +10,7 @@ import ExportEvents from '../views/ExportEvents.vue';
 
 const routes = [
   { path: '/', component: Dashboard  },
-  { path: '/volunteers' ,component: Volunteers },
+  { path: '/volunteers' ,component: Volunteers  },
   { path: '/events', component: Events },
   { path: '/matching', component: Matching },
   { path: '/reports', component: Reports },
@@ -32,6 +32,6 @@ const routes = [
 ];
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });

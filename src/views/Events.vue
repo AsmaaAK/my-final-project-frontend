@@ -1,11 +1,10 @@
 <template>
   <div class="p-6 max-w-3xl mx-auto">
-     <LanguageSwitcher />
     <!-- نموذج الإضافة/التعديل -->
     <h1 class="text-2xl font-bold mb-6">
       {{ editing ? 'تعديل الفعالية' : 'إضافة فعالية جديدة' }}
     </h1>
-    <form @submit.prevent="handleSubmit" class="space-y-4 bg-white dark:bg-gray-800 p-6 rounded shadow mb-8">
+    <form @submit.prevent="handleSubmit" class="space-y-4 mb=6 bg-white dark:bg-gray-800 p-6 rounded shadow mb-8">
       <input v-model="form.title" class="w-full p-2 rounded border" placeholder="اسم الفعالية" required />
       <input v-model="form.description" class="w-full p-2 rounded border" placeholder="الوصف" required />
       <input v-model="form.date" type="date" class="w-full p-2 rounded border" required />

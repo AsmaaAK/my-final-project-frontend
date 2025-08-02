@@ -1,37 +1,56 @@
 <template>
-  <div class="space-y-4"> 
-    <LanguageSwitcher />
-    <Navbar/>
-  </div>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-6">لوحة المعلومات - الرسوم البيانية</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="p-4">
-    <h1 class="text-2xl font-bold mb-4">لوحة البيانات</h1>
-      <VolunteerChart />
-       </div>
-      <div class="bg-white dark:bg-gray-800 p-4 rounded shadow">
-        <h2 class="text-lg font-semibold mb-4">عدد المتطوعين حسب الموقع</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-        
+  <div class="p-4 sm:p-6 max-w-7xl mx-auto">
+    <!-- العنوان الرئيسي -->
+    <h1 class="text-2xl sm:text-3xl font-bold mb-8 text-center md:text-right">
+      لوحة المعلومات - الرسوم البيانية
+    </h1>
+
+    <!-- قسمين رئيسيين -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- لوحة البيانات -->
+      <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">لوحة البيانات</h2>
+        <VolunteerChart />
+      </div>
+
+      <!-- إحصائيات المواقع والفعاليات -->
+      <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
+        <h2 class="text-lg sm:text-xl font-semibold mb-4">عدد المتطوعين حسب الموقع</h2>
+
+        <!-- مخططات صغيرة داخل شبكة -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <VolunteerChart :volunteers="volunteers" />
-          
           <EventsChart :events="events" />
         </div>
+
+        <!-- شريط بياني -->
         <BarChart :chart-data="chartData" :chart-options="chartOptions" />
       </div>
     </div>
+
+    <!-- رسم مهارات المتطوعين -->
+<div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md w-full overflow-auto">
+  <h2 class="text-lg sm:text-xl font-semibold mb-4">عدد المتطوعين حسب الموقع</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <div class="w-full h-full">
+      <VolunteerChart :volunteers="volunteers" />
+    </div>
+    <div class="w-full h-full">
+      <EventsChart :events="events" />
+    </div>
   </div>
-  <SkillChart :volunteers="volunteerList" />
+</div>
+</div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import volunteers from '../assets/volunteers.json'
 import events from '../assets/events.json'
 import EventsChart from '../components/EventChart.vue'
-import VolunteerChart from '../components/volunteerChart.vue'
+import VolunteerChart from '../components/VolunteerChart.vue'
 import SkillChart from '../components/SkillChart.vue'
 import { Bar } from 'vue-chartjs'
 import {
