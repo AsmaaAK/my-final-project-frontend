@@ -4,27 +4,20 @@
     <h1 class="text-2xl sm:text-3xl font-bold mb-8 text-center md:text-right">
       لوحة المعلومات - الرسوم البيانية
     </h1>
-
-    <!-- قسمين رئيسيين -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      
-      <!-- لوحة البيانات -->
       <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
-        <h2 class="text-lg sm:text-xl font-semibold mb-4">لوحة البيانات</h2>
+        <!-- <h2 class="text-lg sm:text-xl font-semibold mb-4">لوحة البيانات</h2> -->
         <VolunteerChart />
       </div>
 
       <!-- إحصائيات المواقع والفعاليات -->
       <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
-        <h2 class="text-lg sm:text-xl font-semibold mb-4">عدد المتطوعين حسب الموقع</h2>
-
+        <!-- <h2 class="text-lg sm:text-xl font-semibold mb-4">عدد المتطوعين حسب الموقع</h2> -->
+        <EventsChart :events="events" />
         <!-- مخططات صغيرة داخل شبكة -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <VolunteerChart :volunteers="volunteers" />
-          <EventsChart :events="events" />
-        </div>
-
-        <!-- شريط بياني -->
+        <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"> -->
+          
+        <!-- </div> -->
         <BarChart :chart-data="chartData" :chart-options="chartOptions" />
       </div>
     </div>

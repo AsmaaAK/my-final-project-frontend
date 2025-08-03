@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- زر الهامبرجر - يظهر فقط في الشاشات الصغيرة -->
     <button 
       @click="toggleSidebar"
       class="fixed z-50 top-4 right-4 p-2 rounded-md text-white dark:text-white md:hidden"
@@ -62,22 +61,6 @@
         >
           <font-awesome-icon class="text-blue-800 dark:text-white" icon="chart-bar" />
           <span>التقارير</span>
-        </RouterLink>
-        <RouterLink 
-          to="/settings" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
-          <font-awesome-icon class="text-blue-800 dark:text-white" icon="cog" />
-          <span>الإعدادات</span>
-        </RouterLink>
-        <RouterLink 
-          to="/export" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
-          <font-awesome-icon class="text-blue-800 dark:text-white" icon="download" />
-          <span>تصدير البيانات</span>
         </RouterLink>
       </nav>
     </aside>
