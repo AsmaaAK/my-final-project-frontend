@@ -1,8 +1,8 @@
 <template>
-  <div class="p-4 md:p-6 max-w-3xl mx-auto">
+  <div class="p-4 md:p-6 max-w-5xl mx-auto"> 
     <!-- نموذج الإضافة/التعديل -->
     <h1 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">
-      {{ editing ? 'تعديل الفعالية' : 'إضافة فعالية جديدة' }}
+      ادارة الفعاليات 
     </h1>
     <form @submit.prevent="handleSubmit" class="mb-4 md:mb-6 bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow space-y-3 md:space-y-4">
       <h2 class="text-lg md:text-xl font-semibold">{{ editing ? 'تعديل الفعالية' : 'إضافة فعالية جديدة' }}</h2>
@@ -10,7 +10,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         <input v-model="form.title" placeholder="اسم الفعالية" required class="p-2 border rounded w-full" />
         <input v-model="form.description" placeholder="الوصف" required class="p-2 border rounded w-full" />
-        <input v-model="form.date" type="date" placeholder="التاريخ" required class="p-2 border rounded w-full" />
+        <input v-model="form.date" placeholder="وقت الفعالية" required class="p-2 border rounded w-full" />
         <input v-model="form.location" placeholder="الموقع" required class="p-2 border rounded w-full" />
         <input v-model="form.skills" placeholder="المهارات المطلوبة (مفصولة بفواصل)" required class="p-2 border rounded sm:col-span-2 lg:col-span-3 w-full" />
       </div>
@@ -26,17 +26,16 @@
     </form>
 
     <!-- فلترة + أزرار التصدير -->
-    <div class="mb-6 bg-white dark:bg-gray-800 p-4 rounded shadow flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 items-center">
+    <div class=" bg-white dark:bg-gray-800 p-4 rounded shadow flex flex-col sm:flex-row justify-end gap-2 md:gap-4 mb-4 items-center">
       <input
-        v-model="filters.location"
+        v-model="filters.location" 
         type="text"
         placeholder="فلترة حسب الموقع"
         class="flex-1 min-w-[150px] p-2 rounded border"
       />
       <input
-        v-model="filters.fromDate"
-        type="date"
-        placeholder="فلترة حسب التاريخ من"
+        v-model="filters.availability"
+        placeholder="فلترة حسب الوقت "
         class="flex-1 min-w-[150px] p-2 rounded border"
       />
       <div class="flex gap-3 w-full sm:w-auto">
@@ -160,7 +159,7 @@ const showModal = ref(false)
 // فلترات البحث
 const filters = ref({
   location: '',
-  fromDate: ''
+  availability: ''
 })
 
 // تحميل البيانات من localStorage
@@ -250,8 +249,8 @@ const filteredEvents = computed(() => {
     const matchLocation = filters.value.location
       ? event.location.toLowerCase().includes(filters.value.location.toLowerCase())
       : true
-    const matchDate = filters.value.fromDate
-      ? event.date >= filters.value.fromDate
+    const matchDate = filters.value.availability
+      ? event.date >= filters.value.availability
       : true
     return matchLocation && matchDate
   })
@@ -260,7 +259,7 @@ const filteredEvents = computed(() => {
 // مسح الفلاتر
 const clearFilters = () => {
   filters.value.location = ''
-  filters.value.fromDate = ''
+  filters.value.availability = ''
 }
 
 // عرض بطاقة معلومات الفعالية
@@ -322,7 +321,7 @@ const exportJSON = () => {
 </script>
 
 <style>
-/* تحسينات للعرض على الجوال */
+
 @media (max-width: 767px) {
   table {
     display: none;

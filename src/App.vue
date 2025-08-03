@@ -3,7 +3,7 @@
     <Sidebar />
     <div class="flex-1">
       <Navbar />
-      <main class="p-4">
+      <main class="  pr-0 pt-20 md:pr-64">
         <router-view />
       </main>
     </div>

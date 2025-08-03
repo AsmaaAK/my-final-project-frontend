@@ -6,10 +6,8 @@
     </h1>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
-        <!-- <h2 class="text-lg sm:text-xl font-semibold mb-4">لوحة البيانات</h2> -->
         <VolunteerChart />
       </div>
-
       <!-- إحصائيات المواقع والفعاليات -->
       <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
         <!-- <h2 class="text-lg sm:text-xl font-semibold mb-4">عدد المتطوعين حسب الموقع</h2> -->
@@ -23,7 +21,7 @@
     </div>
 
     <!-- رسم مهارات المتطوعين -->
-<div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md w-full overflow-auto">
+<!-- <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md w-full overflow-auto">
   <h2 class="text-lg sm:text-xl font-semibold mb-4">عدد المتطوعين حسب الموقع</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -33,8 +31,8 @@
     <div class="w-full h-full">
       <EventsChart :events="events" />
     </div>
-  </div>
-</div>
+  </div> -->
+<!-- </div> -->
 </div>
 </template>
 
@@ -50,6 +48,7 @@ import {
   Chart as ChartJS,
   Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale
 } from 'chart.js'
+import RequiredSkillChart from './RequiredSkillChart.vue'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 

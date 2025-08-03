@@ -110,22 +110,46 @@
 
     <!-- مودال التفاصيل -->
     <div name="fade">
-      <div
-        v-if="showModal"
-        class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4"
-        @click.self="closeModal"
-      >
-        <div class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow w-full max-w-md max-h-[90vh] overflow-y-auto">
-          <h3 class="text-lg md:text-xl font-bold mb-3 md:mb-4">{{ selectedVolunteer.name }}</h3>
-          <p class="mb-2 text-center"><strong>العمر:</strong> {{ selectedVolunteer.age }}</p>
-          <p class="mb-2 text-cente"><strong>الموقع:</strong> {{ selectedVolunteer.location }}</p>
-          <p class="mb-2 text-cente"><strong>الوقت المتاح:</strong> {{ selectedVolunteer.availability }}</p>
-          <p class="mb-2 text-cente"><strong>البريد الإلكتروني:</strong> {{ selectedVolunteer.email }}</p>
-          <p class="mb-2 text-cente"><strong>المهارات:</strong> {{ selectedVolunteer.skills.join(', ') }}</p>
-          <button @click="closeModal" class="mt-4 md:mt-6 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm md:text-base">
-            إغلاق
-          </button>
-        </div>    
+        <div
+          v-if="showModal"
+          class="fixed inset-0 bg-black/30 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+          @click.self="closeModal"
+        >
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto text-gray-800 dark:text-white">
+
+          <!-- أيقونة المستخدم في الأعلى -->
+          <div class="flex flex-col items-center mb-4">
+            <div class="text-blue-500 text-6xl mb-2">
+              <i class="fas fa-user-circle "></i>
+            </div>
+
+            <!-- الاسم مع الأيقونة بجانب الاسم -->
+            <h3 class="flex items-center text-xl md:text-2xl font-bold gap-2">
+              <i class="fas fa-id-badge text-blue-400 text-lg"></i>
+              {{ selectedVolunteer.name }}
+            </h3>
+          </div>
+
+          <!-- تفاصيل المتطوع -->
+          <div class="space-y-2 text-sm md:text-base text-center">
+            <p><strong>🧓 العمر:</strong> {{ selectedVolunteer.age }}</p>
+            <p><strong>📍 الموقع:</strong> {{ selectedVolunteer.location }}</p>
+            <p><strong>⏰ الوقت المتاح:</strong> {{ selectedVolunteer.availability }}</p>
+            <p><strong>📧 البريد الإلكتروني:</strong> {{ selectedVolunteer.email }}</p>
+            <p><strong>🛠 المهارات:</strong> {{ selectedVolunteer.skills.join(', ') }}</p>
+          </div>
+
+          <!-- زر الإغلاق -->
+          <div class="mt-6 text-center">
+            <button
+              @click="closeModal"
+              class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg text-sm md:text-base transition-all duration-200"
+            >
+              إغلاق
+            </button>
+          </div>
+        </div>
+
       </div>
       </div>
   </div>

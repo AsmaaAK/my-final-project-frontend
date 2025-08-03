@@ -32,7 +32,7 @@ onMounted(() => {
       </section>
 
       <section class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow lg:col-span-2">
-        <LocationChart :volunteers="volunteers" />
+      <LocationChart :volunteers="volunteers" />
       </section>
 
       <section class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow lg:col-span-2">

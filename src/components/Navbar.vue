@@ -1,7 +1,6 @@
 <template>
-  <header class="bg-blue-800 dark:bg-gray-800 shadow p-4">
+  <header class="fixed top-0 left-0 right-0 bg-blue-800 dark:bg-gray-800 shadow mb-20 p-4 z-50">
     <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between sm:justify-end gap-4 sm:gap-6">
-      <!-- العناصر الرئيسية -->
       <div class="flex items-center gap-4 sm:gap-6 order-2 sm:order-1">
         <!-- زر الوضع الليلي -->
         <button
@@ -32,16 +31,16 @@ const router = useRouter()
 const { locale } = useI18n()
 
 // اللغة الحالية
-const savedLang = localStorage.getItem('lang') || 'ar'
-locale.value = savedLang
+// const savedLang = localStorage.getItem('lang') || 'ar'
+// locale.value = savedLang
 
-// تغيير اللغة
-function toggleLang() {
-  const newLang = locale.value === 'ar' ? 'en' : 'ar'
-  locale.value = newLang
-  localStorage.setItem('lang', newLang)
-  document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr')
-}
+// // تغيير اللغة
+// function toggleLang() {
+//   const newLang = locale.value === 'ar' ? 'en' : 'ar'
+//   locale.value = newLang
+//   localStorage.setItem('lang', newLang)
+//   document.documentElement.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr')
+// }
 
 // الوضع الليلي
 const isDark = ref(false)
@@ -71,7 +70,6 @@ function logout() {
 </script>
 
 <style scoped>
-/* تحسينات للعرض على الجوال */
 @media (max-width: 640px) {
   header {
     padding: 0.75rem;

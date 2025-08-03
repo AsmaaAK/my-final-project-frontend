@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="fixed right-0 top-0 bottom-0 z-100">
     <button 
       @click="toggleSidebar"
       class="fixed z-50 top-4 right-4 p-2 rounded-md text-white dark:text-white md:hidden"
@@ -11,57 +11,38 @@
 
     <!-- اللوحة الجانبية -->
     <aside 
-      class="w-64 bg-white dark:bg-gray-800 shadow-md p-4 fixed h-full transition-all duration-300 z-40"
-      :class="{
-        'right-0': isSidebarOpen,
-        '-right-64': !isSidebarOpen,
-        'md:relative md:right-0': true
-      }"
+      class="w-64 bg-white dark:bg-gray-800 shadow-md p-4 h-full transition-all duration-300 z-40 fixed md:static"
+      :class="[
+        isSidebarOpen ? 'right-0' : '-right-64',
+        'md:translate-x-0'
+      ]"
     >
       <div class="flex items-center gap-3 pb-7 border-b border-gray-300 dark:border-gray-600">
-        <span class="text-lg font-semibold text-gray-800 dark:text-white">المنظمة الإلكترونية للإعلام الإنساني</span>
+        <span class="text-lg font-semibold text-gray-800 dark:text-white">
+          المنظمة الإلكترونية للإعلام الإنساني
+        </span>
       </div>
       <nav class="space-y-2 pt-6">
-        <RouterLink 
-          to="/" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
+        <router-link to="/" class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="closeSidebarOnMobile">
           <font-awesome-icon class="text-blue-800 dark:text-white" icon="tachometer-alt" />
           <span>لوحة التحكم</span>
-        </RouterLink>
-        <RouterLink 
-          to="/volunteers" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
+        </router-link>
+        <router-link to="/volunteers" class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="closeSidebarOnMobile">
           <font-awesome-icon class="text-blue-800 dark:text-white" icon="users" />
           <span>المتطوعين</span>
-        </RouterLink>
-        <RouterLink 
-          to="/events" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
+        </router-link>
+        <router-link to="/events" class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="closeSidebarOnMobile">
           <font-awesome-icon class="text-blue-800 dark:text-white" icon="calendar-alt" />
           <span>الفعاليات</span>
-        </RouterLink>
-        <RouterLink 
-          to="/matching" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
+        </router-link>
+        <router-link to="/matching" class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="closeSidebarOnMobile">
           <font-awesome-icon class="text-blue-800 dark:text-white" icon="balance-scale" />
           <span>المطابقة</span>
-        </RouterLink>
-        <RouterLink 
-          to="/reports" 
-          class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-          @click="closeSidebarOnMobile"
-        >
+        </router-link>
+        <router-link to="/reports" class="flex items-center gap-2 py-2 px-4 rounded hover:bg-gray-200 dark:hover:bg-gray-700" @click="closeSidebarOnMobile">
           <font-awesome-icon class="text-blue-800 dark:text-white" icon="chart-bar" />
           <span>التقارير</span>
-        </RouterLink>
+        </router-link>
       </nav>
     </aside>
 
@@ -76,7 +57,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
 
 const isSidebarOpen = ref(false)
 
@@ -90,3 +70,5 @@ const closeSidebarOnMobile = () => {
   }
 }
 </script>
+
+
