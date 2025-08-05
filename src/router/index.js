@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Dashboard from '@/views/Dashboard.vue';
 import Volunteers from '@/views/Volunteers.vue';
 import Events from '@/views/Events.vue';
@@ -12,7 +12,7 @@ const routes = [
   { path: '/events', component: Events },
   { path: '/matching', name: 'Matching', component: Matching },
   { path: '/reports', name: 'Reports', component: Reports },
-  { path: '/login', component: () => import('@/views/Login.vue') },
+  { path: '/login', component: () => import('@/views/Login.vue')  },
   { path: '/profile', component: () => import('@/views/UserProfile.vue') },
   { path: '/register-volunteer', component: () => import('@/views/RegisterVolunteer.vue') },
   { path: '/manage-volunteers', component: () => import('@/views/ManageVolunteers.vue') },
@@ -26,6 +26,6 @@ const routes = [
 ];
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });

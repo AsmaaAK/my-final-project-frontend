@@ -13,7 +13,10 @@ export default defineConfig({
     vueDevTools(),
     tailwindcss(),
 
-  ],
+  ],  
+  server: {
+    open: '/Login'  // <-- يفتح هذا المسار عند التشغيل
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
